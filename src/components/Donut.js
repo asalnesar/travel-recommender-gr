@@ -77,7 +77,7 @@ export default class Donut extends Component {
         <Pie
           data={this.state.data}
           cx={this.state.isMapChart? 55 : 90}
-          cy={55}
+          cy={this.state.isMapChart? 55 : 90}
           innerRadius={this.state.innerRadius}
           outerRadius={this.state.outerRadius}
           fill="#8884d8"
