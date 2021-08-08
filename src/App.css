@@ -1,12 +1,16 @@
 .App {
   text-align: center;
+  flex-direction: row;
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
-
+.MapDonutContainer {
+  left:-60px;
+  top:-60px;
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
