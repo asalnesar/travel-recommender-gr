@@ -13,9 +13,11 @@ export default class Donut extends Component {
     this.state = {
         data: this.props.scores,
         overallScore: 0,
-        innerRadius:5,
-        outerRadius:15, 
-        showLabels: false
+        innerRadius:40,
+        outerRadius:60, 
+        showLabels: false,
+        changeSize: this.props.changeSize,
+        isMapChart: this.props.isMapChart
     }
     this.calculateOverallScore = this.calculateOverallScore.bind(this);
     this.calculateDonutSize = this.calculateDonutSize.bind(this);
@@ -25,7 +27,10 @@ export default class Donut extends Component {
   componentDidMount(props){
       let score = this.calculateOverallScore();
       this.setState({overallScore: score},()=>{
-        this.calculateDonutSize();
+        if(this.state.changeSize)
+        {
+          this.calculateDonutSize();
+        }
       });
       
   }
@@ -68,11 +73,11 @@ export default class Donut extends Component {
   }
   render() {
     return (
-      <PieChart width={120} height={120} className="MapDonutContainer" onMouseEnter={this.onPieEnter}>
+      <PieChart className={this.state.isMapChart ? 'map-donut-container' : null} width={this.state.isMapChart? 120 : 200} height={this.state.isMapChart? 120 : 200} onMouseEnter={this.onPieEnter}>
         <Pie
           data={this.state.data}
-          cx={60}
-          cy={60}
+          cx={this.state.isMapChart? 55 : 90}
+          cy={55}
           innerRadius={this.state.innerRadius}
           outerRadius={this.state.outerRadius}
           fill="#8884d8"
@@ -80,6 +85,7 @@ export default class Donut extends Component {
           dataKey="value"
           label = {this.state.showLabels}
           onClick={this.handleClick}
+          isAnimationActive={this.state.isMapChart}
           onMouseEnter={this.onPieEnter}
         >
           {this.state.data.map((entry, index) => (

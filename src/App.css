@@ -1,16 +1,27 @@
 .App {
   text-align: center;
   flex-direction: row;
+  padding: 0 20px;
+}
+.map-donut-container {
+  left:-55px;
+  top:-55px;
+}
+.detail-donut-container{
+  left:55px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.accordion-body-details{
+  padding: 20px 10px;
+  position: relative;
 }
-.MapDonutContainer {
-  left:-60px;
-  top:-60px;
+
+.label-on-donut {
+  position: absolute;
+  top: 23%;
+  left: 40%;
 }
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

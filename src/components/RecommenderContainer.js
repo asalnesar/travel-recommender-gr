@@ -1,5 +1,6 @@
 import React, { Component, PureComponent } from 'react'
 import Accordion from 'react-bootstrap/Accordion'
+import RecommendationDetail from './RecommendationDetail';
 
 export default class RecommenderContainer extends Component {
 
@@ -51,10 +52,10 @@ export default class RecommenderContainer extends Component {
                 <div>
                     <Accordion>
                         {this.state.scoredCountries.map((item,index) => 
-                            <Accordion.Item eventKey={index}>
-                                <Accordion.Header>{index+1} {item.country.name}</Accordion.Header>
+                            <Accordion.Item eventKey={index} key={index}>
+                                <Accordion.Header>{index+1}. {item.country.name}</Accordion.Header>
                                     <Accordion.Body>
-                                    data
+                                     <RecommendationDetail country={item.country} index={index+1}/>
                                     </Accordion.Body>
                             </Accordion.Item>
                         )}
