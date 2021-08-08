@@ -83,7 +83,7 @@ export default class Donut extends Component {
           fill="#8884d8"
           paddingAngle={0}
           dataKey="value"
-          label = {this.state.showLabels}
+          label = {this.state.isMapChart ? this.state.showLabels : true}
           onClick={this.handleClick}
           isAnimationActive={this.state.isMapChart}
           onMouseEnter={this.onPieEnter}

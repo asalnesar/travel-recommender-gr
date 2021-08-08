@@ -47,9 +47,9 @@ export default class RecommenderContainer extends Component {
     }
     render() {
         return (
-            <div>
+            <div style={{'height':'100%'}}>
                 <h3>Best Matched countries for your holiday</h3>
-                <div>
+                <div className="scrollable-div">
                     <Accordion>
                         {this.state.scoredCountries.map((item,index) => 
                             <Accordion.Item eventKey={index} key={index}>

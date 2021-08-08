@@ -12,7 +12,7 @@ export default class RecommendationDetail extends Component {
                     <Donut scores={this.props.country.scores} changeSize={false}/>
                     <h1 className="label-on-donut">{this.props.index}</h1>
                 </div>
-                <h2>{this.props.country.name}</h2>
+                <h3>{this.props.country.name}</h3>
                 <div>
                     <BarChartComponent scores={this.props.country.scores}/>
                 </div>

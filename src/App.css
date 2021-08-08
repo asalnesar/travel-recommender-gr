@@ -2,6 +2,8 @@
   text-align: center;
   flex-direction: row;
   padding: 0 20px;
+  overflow-y: hidden;
+  overflow-x: hidden;
 }
 .map-donut-container {
   left:-55px;
@@ -20,6 +22,9 @@
   position: absolute;
   top: 37%;
   left: 40%;
+}
+.scrollable-div{
+  overflow-y: auto;
 }
 
 @media (prefers-reduced-motion: no-preference) {
