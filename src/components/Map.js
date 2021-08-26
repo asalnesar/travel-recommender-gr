@@ -1,9 +1,9 @@
-import React, {Component} from "react";
+import React, {Component, useEffect} from "react";
 import GoogleMapReact from "google-map-react";
 import Donut from "./Donut";
 import googleMapStyle from "./style";
 
-const DonutComponent = ({ scores }) => <Donut isMapChart={true} scores={scores} changeSize={true}/>;
+const DonutComponent = ({ scores }) => <Donut isMapChart={true} scores={scores} />;
 
 let defaultProps = {
   center: {
@@ -13,8 +13,8 @@ let defaultProps = {
   zoom: 11,
   style: googleMapStyle
 };
-export default class Map extends Component {
-  componentDidMount() {
+const Map = ({countries})  => {
+  useEffect(() => {
     //placing the map based on user's location
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(function(position) {
@@ -22,9 +22,8 @@ export default class Map extends Component {
         defaultProps.center.lng= position.coords.longitude;
       });
     } 
-  }
+  }, []);
   
-  render() {
     return(
     <div style={{ height: "100vh", width: "100%" }}>
       <GoogleMapReact
@@ -32,9 +31,9 @@ export default class Map extends Component {
         defaultCenter={defaultProps.center}
         defaultZoom={5}
         options={{ zoomControl: false, scrollwheel: false, disableDoubleClickZoom: true}}      >
-        {this.props.countries.map((country,index) => <DonutComponent key={index} lat={country.latlng[0]} lng={country.latlng[1]} scores={country.scores}/>)}
+        {countries.map((country,index) => <DonutComponent key={index} lat={country.latlng[0]} lng={country.latlng[1]} scores={country.scores}/>)}
       </GoogleMapReact>
     </div>
     );
-  }
 }
+export default Map;

@@ -1,10 +1,26 @@
+body{
+  height: 100%;
+  overflow: hidden;
+}
+#root {
+  height: 100%;
+}
+
 .App {
   text-align: center;
   flex-direction: row;
-  padding: 0 20px;
+  padding: 10px 20px;
   overflow-y: hidden;
   overflow-x: hidden;
+  height: 100%;
 }
+.mainContainer{
+  height: 100%;
+}
+.recommenderContainer {
+  height: 100%;
+}
+
 .map-donut-container {
   left:-55px;
   top:-55px;
@@ -24,7 +40,8 @@
   left: 40%;
 }
 .scrollable-div{
-  overflow-y: auto;
+  overflow-y: scroll;
+  height: 550px;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -46,6 +63,27 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.sliders-box  {
+  border-width: 1px;
+  border-color: black;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,.125);
+  padding: 10px 10px 15px;
+    
+}
+
+.sliders-box:first-of-type {
+  border-top-left-radius: .25rem;
+  border-top-right-radius: .25rem;
+}
+.sliders-box:last-of-type {
+  border-bottom-left-radius: .25rem;
+  border-bottom-right-radius: .25rem;
+}
+.sliders-box:not(:first-of-type) {
+  border-top: 0;
 }
 
 @keyframes App-logo-spin {

@@ -5,29 +5,15 @@ import '../App.css';
 
 const COLORS = ['#7030a0', '#00b050', '#ffc000', '#0070c0'];
 
-export default class BarChartComponent extends Component {
+ const BarChartComponent = ({scores}) => {
 
-  constructor(props) {
-    super(props);
-    
-  }
-
-  componentDidMount(props){
-      
-      
-  }
-
-  handleClick(){
-    
-  }
-  render() {
     return (
-      <BarChart width={240} height={200} data={this.props.scores} barCategoryGap={1} layout="vertical">
+      <BarChart width={230} height={150} data={scores} barCategoryGap={3} layout="vertical">
         <XAxis type="number" />
         <YAxis type="category" width={10} padding={{ left: 20 }} dataKey="name" hide/>
         <Bar width={20} name="name" dataKey="value">
           {
-            this.props.scores.map((entry, index) => (
+            scores.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={COLORS[index % 20]}/>
             ))
           }
@@ -35,5 +21,6 @@ export default class BarChartComponent extends Component {
         </Bar>
     </BarChart>
     );
-  }
 }
+
+export default BarChartComponent;
