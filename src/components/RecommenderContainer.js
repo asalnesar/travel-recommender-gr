@@ -2,14 +2,26 @@ import React, { Component, useState, useEffect } from "react";
 import Accordion from "react-bootstrap/Accordion";
 import RecommendationDetail from "./RecommendationDetail";
 
-const RecommenderContainer = ({ countries }) => {
+const RecommenderContainer = ({ countries, activeRecommendation }) => {
   const [scoredCountries, setScoredCountries] = useState([]);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
     let countryArray = calculateOverallScores(countries);
     let sorted = sortCountries(countryArray);
     setScoredCountries(sorted);
   }, [countries]);
+
+  useEffect(() => {
+    console.log(scoredCountries);
+    const index = scoredCountries.findIndex(
+      (item) => item.country.id === activeRecommendation
+    );
+    console.log(index);
+    if (index !== -1) {
+      setActiveIndex(index);
+    }
+  }, [activeRecommendation, scoredCountries]);
 
   function calculateOverallScores(countries) {
     let countryArray = [];
@@ -36,10 +48,14 @@ const RecommenderContainer = ({ countries }) => {
     <div style={{ height: "100%" }}>
       <h3>Best Matched countries for your holiday</h3>
       <div className="scrollable-div">
-        <Accordion>
+        <Accordion activeKey={activeIndex}>
           {scoredCountries?.map((item, index) => (
             <Accordion.Item eventKey={index} key={index}>
-              <Accordion.Header>
+              <Accordion.Header
+                onClick={() => {
+                  setActiveIndex(index);
+                }}
+              >
                 {index + 1}. {item.country.name}
               </Accordion.Header>
               <Accordion.Body>

@@ -21,10 +21,10 @@ body{
   height: 100%;
 }
 
-.map-donut-container {
+/* .map-donut-container {
   left:-55px;
   top:-55px;
-}
+} */
 .detail-donut-container{
   left:55px;
 }
@@ -37,7 +37,7 @@ body{
 .label-on-donut {
   position: absolute;
   top: 37%;
-  left: 40%;
+  left: 43%;
 }
 .scrollable-div{
   overflow-y: scroll;
@@ -66,25 +66,23 @@ body{
 }
 
 .sliders-box  {
-  border-width: 1px;
-  border-color: black;
+  border-width: 2px;
+  border: solid;
   background-color: #fff;
-  border: 1px solid rgba(0,0,0,.125);
   padding: 10px 10px 15px;
+  margin-top: 10px;
     
 }
 
-.sliders-box:first-of-type {
-  border-top-left-radius: .25rem;
-  border-top-right-radius: .25rem;
+.donut-button 
+{
+  border: none;
+  background: none;
+  left: -55px;
+  top: -55px;
+  position: relative;
 }
-.sliders-box:last-of-type {
-  border-bottom-left-radius: .25rem;
-  border-bottom-right-radius: .25rem;
-}
-.sliders-box:not(:first-of-type) {
-  border-top: 0;
-}
+
 
 @keyframes App-logo-spin {
   from {

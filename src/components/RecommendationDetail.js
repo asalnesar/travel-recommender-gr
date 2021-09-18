@@ -6,7 +6,7 @@ const RecommendationDetail = ({ country, index }) => {
   return (
     <div>
       <div className="justify-content-center accordion-body-details">
-        <Donut scores={country.scores} isMapChart={false} />
+        <Donut country={country} isMapChart={false} />
         <h1 className="label-on-donut">{index}</h1>
       </div>
       <h3>{country.name}</h3>

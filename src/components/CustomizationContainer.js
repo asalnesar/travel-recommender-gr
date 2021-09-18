@@ -13,13 +13,17 @@ const CustomizationContainer = ({ userData, setUserData }) => {
         {Object.keys(userData).map((item, index) => (
           <div
             className="sliders-box"
-            style={{ backgroundColor: COLORS[index % COLORS.length] }}
+            style={{ borderColor: COLORS[index % COLORS.length] }}
+            key={index}
           >
-            <Form.Label>{item}</Form.Label>
+            <Form.Label>
+              {item}: {userData[item]}%
+            </Form.Label>
             <Form.Range
-              value={userData.item}
+              value={userData[item]}
               onChange={(e) => {
-                setUserData({ ...userData, [item]: e.target.value });
+                console.log(userData);
+                setUserData({ ...userData, [item]: e.target.valueAsNumber });
               }}
               step={20}
             />

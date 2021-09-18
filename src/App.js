@@ -9,8 +9,9 @@ import { useState, useEffect } from "react";
 
 function App() {
   const [data, setData] = useState([]);
+  const [clickedCountryId, setClickedCountryId] = useState(0);
   const [userData, setUserData] = useState({
-    budget: 50,
+    price: 50,
     adventure: 50,
     nightLife: 50,
     sightSeeing: 50,
@@ -20,8 +21,6 @@ function App() {
     setData(calculateCountryScores(Countries));
   }, [userData]);
 
-  useEffect(() => {}, [data]);
-
   const calculateCountryScores = (countries) => {
     const scoredCountries = [];
     countries.map((country) => {
@@ -29,8 +28,8 @@ function App() {
         ...country,
         scores: [
           {
-            name: "cost",
-            value: calculateScore(userData.budget, country.stats.cost),
+            name: "price",
+            value: calculateScore(userData.price, country.stats.cost),
           },
           {
             name: "nightLife",
@@ -70,10 +69,14 @@ function App() {
           />
         </Col>
         <Col xs={7}>
-          <Map countries={data} />
+          <Map countries={data} countryClicked={setClickedCountryId} />
         </Col>
         <Col className="recommenderContainer">
-          <RecommenderContainer className="col-3" countries={data} />
+          <RecommenderContainer
+            className="col-3"
+            countries={data}
+            activeRecommendation={clickedCountryId}
+          />
         </Col>
       </Row>
     </div>
