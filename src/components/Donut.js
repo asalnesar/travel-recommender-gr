@@ -39,7 +39,7 @@ const Donut = ({ country, isMapChart, donutClicked, label }) => {
 
   const centerLabel = !isMapChart ? (
     <text
-      x={donutState.outerRadius + 5}
+      x={donutState.outerRadius + 10}
       y={donutState.outerRadius}
       textAnchor="middle"
       dominantBaseline="middle"

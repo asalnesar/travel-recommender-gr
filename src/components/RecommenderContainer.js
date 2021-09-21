@@ -5,33 +5,27 @@ import RecommendationDetail from "./RecommendationDetail";
 const RecommenderContainer = ({ countries, activeRecommendation }) => {
   // const [scoredCountries, setScoredCountries] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
-
-  // useEffect(() => {
-  //   let sorted = sortCountries(countries);
-  //   // setScoredCountries(sorted);
-  // }, [countries]);
+  const [activeId, setActiveId] = useState(activeRecommendation);
 
   useEffect(() => {
-    console.log("HERE");
-    // console.log(scoredCountries);
-
+    setActiveId(activeRecommendation);
     const index = countries.findIndex(
       (item) => item.id === activeRecommendation
     );
-    console.log(index);
     if (index !== -1) {
       setActiveIndex(index);
     }
   }, [activeRecommendation]);
 
-  function sortCountries(unsortedArray) {
-    console.log("ass");
-    console.log(unsortedArray);
-    let sorted = unsortedArray;
-    sorted.sort((a, b) => b.overallScore - a.overallScore);
-    return sorted;
-  }
-  console.log(countries);
+  useEffect(() => {
+    console.log("country changed" + activeId);
+    const index = countries.findIndex((item) => item.id === activeId);
+    console.log("country changed index" + index);
+    if (index !== -1) {
+      setActiveIndex(index);
+    }
+  }, [countries]);
+
   return (
     <div style={{ height: "100%" }}>
       <h3>Best Matched countries for your holiday</h3>
@@ -41,7 +35,11 @@ const RecommenderContainer = ({ countries, activeRecommendation }) => {
             <Accordion.Item eventKey={index} key={index}>
               <Accordion.Header
                 onClick={() => {
-                  setActiveIndex(index);
+                  if (index === activeIndex) {
+                    setActiveIndex(-1);
+                  } else {
+                    setActiveIndex(index);
+                  }
                 }}
               >
                 {index + 1}. {item.name}

@@ -18,7 +18,9 @@ function App() {
   });
 
   useEffect(() => {
-    setData(calculateCountryScores(Countries));
+    var unsorted = calculateCountryScores(Countries);
+    var sorted = unsorted.sort((a, b) => b.overallScore - a.overallScore);
+    setData(sorted);
   }, [userData]);
 
   const calculateCountryScores = (countries) => {
@@ -63,7 +65,7 @@ function App() {
       scoredCountries.push(scoredCountry);
       return scoredCountry;
     });
-    return scoredCountries.sort((a, b) => a.overallScore - b.overallScore);
+    return scoredCountries;
   };
 
   const calculateScore = (userPreference, countryScore) => {

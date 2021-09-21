@@ -16,9 +16,10 @@ const RecommendationDetail = ({ country, index }) => {
           </p>
         </div>
       </div>
-      <hr />
+      <hr></hr>
+      <h6>Overall score: {country.overallScore}</h6>
       <div>
-        <p>Scores of {country.name} out of 100 based on your preference:</p>
+        <p>Scores of {country.name} out of 100 based on your preferences:</p>
         <BarChartComponent scores={country.scores} />
       </div>
     </div>
