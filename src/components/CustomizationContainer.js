@@ -10,7 +10,7 @@ const strings = (item) => {
       return {
         title: "Price",
         description: "How much are you willing to spend?",
-        symbol: "💶",
+        symbol: "💲",
       };
     case "sightSeeing":
       return {
@@ -78,7 +78,7 @@ const CustomizationContainer = ({ userData, setUserData }) => {
                 console.log(userData);
                 setUserData({ ...userData, [item]: e.target.valueAsNumber });
               }}
-              step={10}
+              step={25}
             />
             <p className="footer-note">{strings(item).description}</p>
           </div>

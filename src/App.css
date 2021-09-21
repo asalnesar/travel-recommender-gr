@@ -81,8 +81,7 @@ body{
 
 .footer-note
 {
-  font-size:x-small;
-  color: "060606";
+  font-size: small;
 }
 
 @keyframes App-logo-spin {
