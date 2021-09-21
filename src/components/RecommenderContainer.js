@@ -3,66 +3,51 @@ import Accordion from "react-bootstrap/Accordion";
 import RecommendationDetail from "./RecommendationDetail";
 
 const RecommenderContainer = ({ countries, activeRecommendation }) => {
-  const [scoredCountries, setScoredCountries] = useState([]);
+  // const [scoredCountries, setScoredCountries] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  useEffect(() => {
-    let countryArray = calculateOverallScores(countries);
-    let sorted = sortCountries(countryArray);
-    setScoredCountries(sorted);
-  }, [countries]);
+  // useEffect(() => {
+  //   let sorted = sortCountries(countries);
+  //   // setScoredCountries(sorted);
+  // }, [countries]);
 
   useEffect(() => {
-    console.log(scoredCountries);
-    const index = scoredCountries.findIndex(
-      (item) => item.country.id === activeRecommendation
+    console.log("HERE");
+    // console.log(scoredCountries);
+
+    const index = countries.findIndex(
+      (item) => item.id === activeRecommendation
     );
     console.log(index);
     if (index !== -1) {
       setActiveIndex(index);
     }
-  }, [activeRecommendation, scoredCountries]);
-
-  function calculateOverallScores(countries) {
-    let countryArray = [];
-    countries.forEach((country) => {
-      let sum = 0;
-      country.scores.forEach((item) => {
-        sum += item.value;
-      });
-      let scoredCountry = {
-        score: sum / 4,
-        country: country,
-      };
-      countryArray.push(scoredCountry);
-    });
-    return countryArray;
-  }
+  }, [activeRecommendation]);
 
   function sortCountries(unsortedArray) {
-    let sorted = [].concat(unsortedArray);
-    sorted.sort((a, b) => b.score - a.score);
+    console.log("ass");
+    console.log(unsortedArray);
+    let sorted = unsortedArray;
+    sorted.sort((a, b) => b.overallScore - a.overallScore);
     return sorted;
   }
+  console.log(countries);
   return (
     <div style={{ height: "100%" }}>
       <h3>Best Matched countries for your holiday</h3>
       <div className="scrollable-div">
         <Accordion activeKey={activeIndex}>
-          {scoredCountries?.map((item, index) => (
+          {countries?.map((item, index) => (
             <Accordion.Item eventKey={index} key={index}>
               <Accordion.Header
                 onClick={() => {
                   setActiveIndex(index);
                 }}
               >
-                {index + 1}. {item.country.name}
+                {index + 1}. {item.name}
               </Accordion.Header>
               <Accordion.Body>
-                <RecommendationDetail
-                  country={item.country}
-                  index={index + 1}
-                />
+                <RecommendationDetail country={item} index={index + 1} />
               </Accordion.Body>
             </Accordion.Item>
           ))}

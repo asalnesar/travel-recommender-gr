@@ -1,16 +1,24 @@
 import React, { Component } from "react";
 import Donut from "./Donut";
+import { Col, Row } from "react-bootstrap";
 import BarChartComponent from "./BarChartComponent";
+import ScoreDetails from "./ScoreDetails";
 
 const RecommendationDetail = ({ country, index }) => {
   return (
     <div>
-      <div className="justify-content-center accordion-body-details">
-        <Donut country={country} isMapChart={false} />
-        <h1 className="label-on-donut">{index}</h1>
+      <div className="align-items-center" style={{ display: "flex" }}>
+        <Donut country={country} isMapChart={false} label={index} />
+        <div style={{ textAlign: "start", marginLeft: 10 }}>
+          <h5>{country.name}</h5>
+          <p className="footer-note">
+            Each parameter's effect on the recommendation
+          </p>
+        </div>
       </div>
-      <h3>{country.name}</h3>
+      <hr />
       <div>
+        <p>Scores of {country.name} out of 100 based on your preference:</p>
         <BarChartComponent scores={country.scores} />
       </div>
     </div>

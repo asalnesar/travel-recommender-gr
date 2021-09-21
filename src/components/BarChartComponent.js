@@ -1,5 +1,13 @@
 import React, { Component, PureComponent, useState } from "react";
-import { BarChart, Bar, XAxis, YAxis, LabelList, Cell } from "recharts";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  LabelList,
+  Cell,
+  ResponsiveContainer,
+} from "recharts";
 import "../App.css";
 
 const COLORS = ["#7030a0", "#00b050", "#ffc000", "#0070c0"];
@@ -7,25 +15,29 @@ const COLORS = ["#7030a0", "#00b050", "#ffc000", "#0070c0"];
 const BarChartComponent = ({ scores }) => {
   return (
     <BarChart
-      width={230}
+      width={250}
       height={150}
       data={scores}
-      barCategoryGap={3}
+      barCategoryGap={5}
       layout="vertical"
     >
-      <XAxis type="number" />
+      <XAxis type="number" fontSize="small" />
       <YAxis
         type="category"
-        width={10}
-        padding={{ left: 20 }}
+        width={85}
         dataKey="name"
-        hide
+        minTickGap={1}
+        fontSize="small"
       />
-      <Bar width={20} name="name" dataKey="value">
+      <Bar name="name" dataKey="value">
         {scores.map((entry, index) => (
           <Cell key={`cell-${index}`} fill={COLORS[index % 20]} />
         ))}
-        <LabelList dataKey="name" position="inside" style={{ fill: "#fff" }} />
+        <LabelList
+          dataKey="value"
+          position="inside"
+          style={{ fill: "#fff", fontSize: "small" }}
+        />
       </Bar>
     </BarChart>
   );

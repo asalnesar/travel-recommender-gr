@@ -12,8 +12,8 @@ function App() {
   const [clickedCountryId, setClickedCountryId] = useState(0);
   const [userData, setUserData] = useState({
     price: 50,
-    adventure: 50,
     nightLife: 50,
+    adventure: 50,
     sightSeeing: 50,
   });
 
@@ -24,34 +24,46 @@ function App() {
   const calculateCountryScores = (countries) => {
     const scoredCountries = [];
     countries.map((country) => {
+      const priceScore = calculateScore(userData.price, country.stats.cost);
+      const nightLifeScore = calculateScore(
+        userData.nightLife,
+        country.stats.nightLife
+      );
+      const adventureScore = calculateScore(
+        userData.adventure,
+        country.stats.adventure
+      );
+      const sightScore = calculateScore(
+        userData.sightSeeing,
+        country.stats.sightSeeing
+      );
       const scoredCountry = {
         ...country,
         scores: [
           {
             name: "price",
-            value: calculateScore(userData.price, country.stats.cost),
+            value: priceScore,
           },
           {
             name: "nightLife",
-            value: calculateScore(userData.nightLife, country.stats.nightLife),
+            value: nightLifeScore,
           },
           {
             name: "adventure",
-            value: calculateScore(userData.adventure, country.stats.adventure),
+            value: adventureScore,
           },
           {
             name: "sightSeeing",
-            value: calculateScore(
-              userData.sightSeeing,
-              country.stats.sightSeeing
-            ),
+            value: sightScore,
           },
         ],
+        overallScore:
+          (priceScore + adventureScore + nightLifeScore + sightScore) / 4,
       };
       scoredCountries.push(scoredCountry);
       return scoredCountry;
     });
-    return scoredCountries;
+    return scoredCountries.sort((a, b) => a.overallScore - b.overallScore);
   };
 
   const calculateScore = (userPreference, countryScore) => {

@@ -21,10 +21,6 @@ body{
   height: 100%;
 }
 
-/* .map-donut-container {
-  left:-55px;
-  top:-55px;
-} */
 .detail-donut-container{
   left:55px;
 }
@@ -83,6 +79,11 @@ body{
   position: relative;
 }
 
+.footer-note
+{
+  font-size:x-small;
+  color: "060606";
+}
 
 @keyframes App-logo-spin {
   from {
