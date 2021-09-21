@@ -18,9 +18,8 @@ const RecommenderContainer = ({ countries, activeRecommendation }) => {
   }, [activeRecommendation]);
 
   useEffect(() => {
-    console.log("country changed" + activeId);
+    if (activeIndex === -1) return;
     const index = countries.findIndex((item) => item.id === activeId);
-    console.log("country changed index" + index);
     if (index !== -1) {
       setActiveIndex(index);
     }
@@ -39,6 +38,7 @@ const RecommenderContainer = ({ countries, activeRecommendation }) => {
                     setActiveIndex(-1);
                   } else {
                     setActiveIndex(index);
+                    setActiveId(item.id);
                   }
                 }}
               >

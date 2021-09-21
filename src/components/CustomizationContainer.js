@@ -64,26 +64,24 @@ const CustomizationContainer = ({ userData, setUserData }) => {
       <h3>Customize to find your next destination</h3>
       <Form>
         {Object.keys(userData).map((item, index) => (
-          <>
-            <div
-              className="sliders-box"
-              style={{ borderColor: COLORS[index % COLORS.length] }}
-              key={index}
-            >
-              <Form.Label>
-                {strings(item).title}: {findEmoji(item, userData[item])}
-              </Form.Label>
-              <Form.Range
-                value={userData[item]}
-                onChange={(e) => {
-                  console.log(userData);
-                  setUserData({ ...userData, [item]: e.target.valueAsNumber });
-                }}
-                step={10}
-              />
-              <p className="footer-note">{strings(item).description}</p>
-            </div>
-          </>
+          <div
+            className="sliders-box"
+            style={{ borderColor: COLORS[index % COLORS.length] }}
+            key={index}
+          >
+            <Form.Label>
+              {strings(item).title}: {findEmoji(item, userData[item])}
+            </Form.Label>
+            <Form.Range
+              value={userData[item]}
+              onChange={(e) => {
+                console.log(userData);
+                setUserData({ ...userData, [item]: e.target.valueAsNumber });
+              }}
+              step={10}
+            />
+            <p className="footer-note">{strings(item).description}</p>
+          </div>
         ))}
       </Form>
     </div>

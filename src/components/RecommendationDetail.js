@@ -1,8 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import Donut from "./Donut";
-import { Col, Row } from "react-bootstrap";
 import BarChartComponent from "./BarChartComponent";
-import ScoreDetails from "./ScoreDetails";
 
 const RecommendationDetail = ({ country, index }) => {
   return (
@@ -17,10 +15,13 @@ const RecommendationDetail = ({ country, index }) => {
         </div>
       </div>
       <hr></hr>
-      <h6>Overall score: {country.overallScore}</h6>
       <div>
-        <p>Scores of {country.name} out of 100 based on your preferences:</p>
+        <p className="footer-note">
+          Scores of {country.name} out of 100 based on your preferences:
+        </p>
         <BarChartComponent scores={country.scores} />
+        <hr />
+        <p>Overall score: {country.overallScore}/100</p>
       </div>
     </div>
   );

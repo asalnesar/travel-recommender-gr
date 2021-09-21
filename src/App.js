@@ -82,7 +82,7 @@ function App() {
             setUserData={setUserData}
           />
         </Col>
-        <Col xs={7}>
+        <Col xs={6}>
           <Map countries={data} countryClicked={setClickedCountryId} />
         </Col>
         <Col className="recommenderContainer">

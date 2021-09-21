@@ -3,16 +3,19 @@ import GoogleMapReact from "google-map-react";
 import Donut from "./Donut";
 import googleMapStyle from "./style";
 
-const DonutComponent = ({ country, countryClicked }) => (
-  <Donut
-    isMapChart={true}
-    country={country}
-    donutClicked={(id) => {
-      countryClicked(id);
-    }}
-  />
-);
-
+const DonutComponent = ({ country, countryClicked, index }) => {
+  console.log(country.name + index);
+  return (
+    <Donut
+      isMapChart={true}
+      country={country}
+      donutClicked={(id) => {
+        countryClicked(id);
+      }}
+      isFirst={index === 0}
+    />
+  );
+};
 let defaultProps = {
   center: {
     lat: 47,
@@ -22,16 +25,6 @@ let defaultProps = {
   style: googleMapStyle,
 };
 const Map = ({ countries, countryClicked }) => {
-  useEffect(() => {
-    //placing the map based on user's location
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(function (position) {
-        defaultProps.center.lat = position.coords.latitude;
-        defaultProps.center.lng = position.coords.longitude;
-      });
-    }
-  }, []);
-
   return (
     <div style={{ height: "100vh", width: "100%" }}>
       <GoogleMapReact
@@ -48,6 +41,7 @@ const Map = ({ countries, countryClicked }) => {
       >
         {countries.map((country, index) => (
           <DonutComponent
+            index={index}
             key={index}
             lat={country.latlng[0]}
             lng={country.latlng[1]}

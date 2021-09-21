@@ -1,27 +1,12 @@
-import React, {
-  Component,
-  PureComponent,
-  useState,
-  useRef,
-  useEffect,
-} from "react";
-import {
-  PieChart,
-  Pie,
-  Sector,
-  Cell,
-  ResponsiveContainer,
-  Label,
-  LabelList,
-} from "recharts";
+import React, { useState, useRef, useEffect } from "react";
+import { PieChart, Pie, Tooltip, Cell } from "recharts";
 import "../App.css";
-import { Col, Row, Card, Overlay } from "react-bootstrap";
 
 import ScoreDetails from "./ScoreDetails";
 
 const COLORS = ["#7030a0", "#00b050", "#ffc000", "#0070c0"];
 
-const Donut = ({ country, isMapChart, donutClicked, label }) => {
+const Donut = ({ country, isMapChart, donutClicked, label, isFirst }) => {
   const [donutState, setDonutState] = useState({
     innerRadius: 30,
     outerRadius: 50,
@@ -49,6 +34,9 @@ const Donut = ({ country, isMapChart, donutClicked, label }) => {
       {label}
     </text>
   ) : null;
+  // const tooltip = (country) => {
+  //   return <Tooltip content={<ScoreDetails country={country} />} />;
+  // };
 
   function calculateDonutSize(score) {
     if (score <= 25) {
@@ -73,6 +61,14 @@ const Donut = ({ country, isMapChart, donutClicked, label }) => {
         outerRadius: 45,
       });
     }
+    //set the first recommendation the biggest
+    if (isFirst) {
+      setDonutState({
+        innerRadius: 40,
+        outerRadius: 55,
+      });
+    }
+    console.log(country.name + isFirst);
   }
   function handleClick() {
     if (isMapChart) {
@@ -80,7 +76,6 @@ const Donut = ({ country, isMapChart, donutClicked, label }) => {
     }
   }
   const RADIAN = Math.PI / 180;
-
   const renderCustomizedLabel = ({
     cx,
     cy,
@@ -125,6 +120,11 @@ const Donut = ({ country, isMapChart, donutClicked, label }) => {
         }
         ref={target}
       >
+        <Tooltip
+          wrapperStyle={{ zIndex: 1000 }}
+          content={<ScoreDetails country={country} />}
+        />
+
         {centerLabel}
         <Pie
           data={country.scores}
@@ -142,22 +142,6 @@ const Donut = ({ country, isMapChart, donutClicked, label }) => {
           ))}
         </Pie>
       </PieChart>
-      <Overlay target={target.current} show={true} placement="left">
-        {({ placement, arrowProps, show: _show, popper, ...props }) => (
-          <div
-            {...props}
-            style={{
-              backgroundColor: "rgba(255, 100, 100, 0.85)",
-              padding: "2px 10px",
-              color: "white",
-              borderRadius: 3,
-              ...props.style,
-            }}
-          >
-            Simple tooltip
-          </div>
-        )}
-      </Overlay>
     </>
   );
 };
