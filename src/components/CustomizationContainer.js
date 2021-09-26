@@ -54,7 +54,7 @@ function hexToRgbA(hex) {
     }
     c = "0x" + c.join("");
     return (
-      "rgba(" + [(c >> 16) & 255, (c >> 8) & 255, c & 255].join(",") + ",0.5)"
+      "rgba(" + [(c >> 16) & 255, (c >> 8) & 255, c & 255].join(",") + ",0.3)"
     );
   }
   throw new Error("Bad Hex");
@@ -64,7 +64,7 @@ const CustomizationContainer = ({ userData, setUserData }) => {
   const findEmoji = (item, value, parameterIndex) => {
     let count = 0;
     let result = [];
-    if (value >= 0 && value <= 25) {
+    if (value > 0 && value <= 25) {
       count = 1;
     } else if (value > 25 && value <= 50) {
       count = 2;
