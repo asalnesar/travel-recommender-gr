@@ -84,7 +84,6 @@ const CustomizationContainer = ({ userData, setUserData }) => {
         ></FontAwesomeIcon>
       );
     }
-    console.log(result);
     return <span>{result}</span>;
   };
   return (

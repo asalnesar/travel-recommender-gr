@@ -18,6 +18,10 @@ function App() {
   });
 
   useEffect(() => {
+    document.title = "Destination Recommender";
+  }, []);
+
+  useEffect(() => {
     var unsorted = calculateCountryScores(Countries);
     var sorted = unsorted.sort((a, b) => b.overallScore - a.overallScore);
     setData(sorted);
