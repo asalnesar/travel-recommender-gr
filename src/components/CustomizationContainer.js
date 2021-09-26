@@ -1,6 +1,13 @@
 import React from "react";
 import { Form, Card } from "react-bootstrap";
 import "../App.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faGlassCheers,
+  faEuroSign,
+  faCampground,
+  faCamera,
+} from "@fortawesome/free-solid-svg-icons";
 
 const COLORS = ["#7030a0", "#00b050", "#ffc000", "#0070c0"];
 
@@ -10,25 +17,25 @@ const strings = (item) => {
       return {
         title: "Price",
         description: "How much are you willing to spend?",
-        symbol: "💲",
+        symbol: faEuroSign,
       };
     case "sightSeeing":
       return {
         title: "Sight-seeing",
         description: "How important is sight-seeing to you?",
-        symbol: "📷",
+        symbol: faCamera,
       };
     case "adventure":
       return {
         title: "Adventure",
         description: "How  important is adventure to you?",
-        symbol: "⛺️",
+        symbol: faCampground,
       };
     case "nightLife":
       return {
         title: "Night-life",
         description: "How much  night-life do you expect on your vacation?",
-        symbol: "💃🏻",
+        symbol: faGlassCheers,
       };
     default:
       return {
@@ -47,16 +54,16 @@ function hexToRgbA(hex) {
     }
     c = "0x" + c.join("");
     return (
-      "rgba(" + [(c >> 16) & 255, (c >> 8) & 255, c & 255].join(",") + ",0.7)"
+      "rgba(" + [(c >> 16) & 255, (c >> 8) & 255, c & 255].join(",") + ",0.5)"
     );
   }
   throw new Error("Bad Hex");
 }
 
 const CustomizationContainer = ({ userData, setUserData }) => {
-  const findEmoji = (item, value) => {
+  const findEmoji = (item, value, parameterIndex) => {
     let count = 0;
-    let result = "";
+    let result = [];
     if (value >= 0 && value <= 25) {
       count = 1;
     } else if (value > 25 && value <= 50) {
@@ -69,9 +76,16 @@ const CustomizationContainer = ({ userData, setUserData }) => {
       count = 0;
     }
     for (let index = 0; index < count; index++) {
-      result = result.concat(" " + strings(item).symbol);
+      result.push(
+        <FontAwesomeIcon
+          icon={strings(item).symbol}
+          color={COLORS[parameterIndex % COLORS.length]}
+          style={{ paddingRight: 1 }}
+        ></FontAwesomeIcon>
+      );
     }
-    return result;
+    console.log(result);
+    return <span>{result}</span>;
   };
   return (
     <div>
@@ -93,7 +107,7 @@ const CustomizationContainer = ({ userData, setUserData }) => {
               >
                 {strings(item).title}:
               </span>{" "}
-              {findEmoji(item, userData[item])}
+              {findEmoji(item, userData[item], index)}
             </Form.Label>
             <Form.Range
               value={userData[item]}
