@@ -6,7 +6,7 @@ import ScoreDetails from "./ScoreDetails";
 
 const COLORS = ["#7030a0", "#00b050", "#ffc000", "#0070c0"];
 
-const Donut = ({ country, isMapChart, donutClicked, label, isFirst }) => {
+const Donut = ({ country, isMapChart, donutClicked, label }) => {
   const [donutState, setDonutState] = useState({
     innerRadius: 30,
     outerRadius: 50,
@@ -62,13 +62,12 @@ const Donut = ({ country, isMapChart, donutClicked, label, isFirst }) => {
       });
     }
     //set the first recommendation the biggest
-    if (isFirst) {
+    if (label === 1) {
       setDonutState({
         innerRadius: 40,
         outerRadius: 55,
       });
     }
-    console.log(country.name + isFirst);
   }
   function handleClick() {
     if (isMapChart) {
@@ -103,46 +102,44 @@ const Donut = ({ country, isMapChart, donutClicked, label, isFirst }) => {
     );
   };
   return (
-    <>
-      <PieChart
-        className={isMapChart ? "map-donut-container" : null}
-        width={
-          isMapChart
-            ? donutState.outerRadius * 2
-            : (donutState.outerRadius + 10) * 2
-        }
-        height={donutState.outerRadius * 2}
-        onClick={handleClick}
-        style={
-          isMapChart
-            ? { left: -donutState.outerRadius, top: -donutState.outerRadius }
-            : null
-        }
-        ref={target}
-      >
-        <Tooltip
-          wrapperStyle={{ zIndex: 1000 }}
-          content={<ScoreDetails country={country} />}
-        />
+    <PieChart
+      className={isMapChart ? "map-donut-container" : null}
+      width={
+        isMapChart
+          ? donutState.outerRadius * 2
+          : (donutState.outerRadius + 10) * 2
+      }
+      height={donutState.outerRadius * 2}
+      onClick={handleClick}
+      style={
+        isMapChart
+          ? { left: -donutState.outerRadius, top: -donutState.outerRadius }
+          : null
+      }
+      ref={target}
+    >
+      <Tooltip
+        wrapperStyle={{ zIndex: 1000 }}
+        content={<ScoreDetails country={country} rank={label} />}
+      />
 
-        {centerLabel}
-        <Pie
-          data={country.scores}
-          innerRadius={donutState.innerRadius}
-          outerRadius={donutState.outerRadius}
-          fill="#8884d8"
-          paddingAngle={0}
-          dataKey="value"
-          label={!isMapChart && renderCustomizedLabel}
-          labelLine={false}
-          isAnimationActive={isMapChart}
-        >
-          {country.scores.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-          ))}
-        </Pie>
-      </PieChart>
-    </>
+      {centerLabel}
+      <Pie
+        data={country.scores}
+        innerRadius={donutState.innerRadius}
+        outerRadius={donutState.outerRadius}
+        fill="#8884d8"
+        paddingAngle={0}
+        dataKey="value"
+        label={!isMapChart && renderCustomizedLabel}
+        labelLine={false}
+        isAnimationActive={isMapChart}
+      >
+        {country.scores.map((entry, index) => (
+          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+        ))}
+      </Pie>
+    </PieChart>
   );
 };
 

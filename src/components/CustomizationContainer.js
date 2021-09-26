@@ -38,6 +38,20 @@ const strings = (item) => {
       };
   }
 };
+function hexToRgbA(hex) {
+  var c;
+  if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
+    c = hex.substring(1).split("");
+    if (c.length == 3) {
+      c = [c[0], c[0], c[1], c[1], c[2], c[2]];
+    }
+    c = "0x" + c.join("");
+    return (
+      "rgba(" + [(c >> 16) & 255, (c >> 8) & 255, c & 255].join(",") + ",0.7)"
+    );
+  }
+  throw new Error("Bad Hex");
+}
 
 const CustomizationContainer = ({ userData, setUserData }) => {
   const findEmoji = (item, value) => {
@@ -66,16 +80,24 @@ const CustomizationContainer = ({ userData, setUserData }) => {
         {Object.keys(userData).map((item, index) => (
           <div
             className="sliders-box"
-            style={{ borderColor: COLORS[index % COLORS.length] }}
+            style={{
+              backgroundColor: hexToRgbA(COLORS[index % COLORS.length]),
+            }}
             key={index}
           >
             <Form.Label>
-              {strings(item).title}: {findEmoji(item, userData[item])}
+              <span
+                style={{
+                  fontWeight: "bold",
+                }}
+              >
+                {strings(item).title}:
+              </span>{" "}
+              {findEmoji(item, userData[item])}
             </Form.Label>
             <Form.Range
               value={userData[item]}
               onChange={(e) => {
-                console.log(userData);
                 setUserData({ ...userData, [item]: e.target.valueAsNumber });
               }}
               step={25}

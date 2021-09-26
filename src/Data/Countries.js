@@ -29,5 +29,17 @@ const Countries = [
     name: "Austria",
     stats: { cost: 60, nightLife: 60, adventure: 90, sightSeeing: 80 },
   },
+  {
+    id: 6,
+    latlng: [40, -4],
+    name: "Spain",
+    stats: { cost: 80, nightLife: 90, adventure: 30, sightSeeing: 70 },
+  },
+  {
+    id: 7,
+    latlng: [47, 8],
+    name: "Switzerland",
+    stats: { cost: 100, nightLife: 20, adventure: 90, sightSeeing: 40 },
+  },
 ];
 export { Countries };

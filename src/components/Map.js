@@ -4,7 +4,6 @@ import Donut from "./Donut";
 import googleMapStyle from "./style";
 
 const DonutComponent = ({ country, countryClicked, index }) => {
-  console.log(country.name + index);
   return (
     <Donut
       isMapChart={true}
@@ -12,14 +11,14 @@ const DonutComponent = ({ country, countryClicked, index }) => {
       donutClicked={(id) => {
         countryClicked(id);
       }}
-      isFirst={index === 0}
+      label={index + 1}
     />
   );
 };
 let defaultProps = {
   center: {
-    lat: 47,
-    lng: 8,
+    lat: 43.733,
+    lng: 7.4,
   },
   zoom: 11,
   style: googleMapStyle,
@@ -35,7 +34,6 @@ const Map = ({ countries, countryClicked }) => {
           zoomControl: false,
           scrollwheel: false,
           disableDoubleClickZoom: true,
-          draggable: false,
           draggableCursor: false,
         }}
       >

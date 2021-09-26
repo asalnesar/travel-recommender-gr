@@ -1,6 +1,7 @@
 body{
   height: 100%;
   overflow: hidden;
+  box-sizing: border-box;
 }
 #root {
   height: 100%;
@@ -8,17 +9,14 @@ body{
 
 .App {
   text-align: center;
-  flex-direction: row;
   padding: 10px 20px;
-  overflow-y: hidden;
-  overflow-x: hidden;
   height: 100%;
 }
 .mainContainer{
   height: 100%;
 }
 .recommenderContainer {
-  height: 100%;
+  box-sizing:content-box;
 }
 
 .detail-donut-container{
@@ -36,8 +34,9 @@ body{
   left: 43%;
 }
 .scrollable-div{
-  overflow-y: scroll;
-  height: 550px;
+  overflow-y: auto;
+  height: 75%;
+  min-height: 75%;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -62,12 +61,11 @@ body{
 }
 
 .sliders-box  {
-  border-width: 2px;
-  border: solid;
+  height: 120px;
   background-color: #fff;
   padding: 10px 10px 15px;
   margin-top: 10px;
-    
+  border-radius: 14px;
 }
 
 .donut-button 

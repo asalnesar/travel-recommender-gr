@@ -76,16 +76,16 @@ function App() {
   return (
     <div className="App">
       <Row className="mainContainer">
-        <Col>
+        <Col style={{ height: "auto" }}>
           <CustomizationContainer
             userData={userData}
             setUserData={setUserData}
           />
         </Col>
-        <Col xs={6}>
+        <Col xs={6} style={{ height: "auto" }}>
           <Map countries={data} countryClicked={setClickedCountryId} />
         </Col>
-        <Col className="recommenderContainer">
+        <Col className="recommenderContainer" style={{ height: "auto" }}>
           <RecommenderContainer
             className="col-3"
             countries={data}

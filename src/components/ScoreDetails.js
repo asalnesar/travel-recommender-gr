@@ -25,7 +25,7 @@ export const ScoreRow = ({ name, value, color }) => {
   );
 };
 
-const ScoreDetails = ({ country }) => {
+const ScoreDetails = ({ country, rank }) => {
   return (
     <Card style={{ width: 200 }} className="custom-tooltip">
       <Card.Header>
@@ -43,6 +43,7 @@ const ScoreDetails = ({ country }) => {
       </Card.Body>
       <Card.Footer>
         <Card.Subtitle>Overall score: {country.overallScore}</Card.Subtitle>
+        <Card.Text>Rank {rank}</Card.Text>
       </Card.Footer>
     </Card>
   );
