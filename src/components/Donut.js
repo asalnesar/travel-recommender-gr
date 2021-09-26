@@ -1,10 +1,10 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { PieChart, Pie, Tooltip, Cell } from "recharts";
 import "../App.css";
 
 import ScoreDetails from "./ScoreDetails";
 
-const COLORS = ["#7030a0", "#00b050", "#ffc000", "#0070c0"];
+const COLORS = ["#14B1B2", "#FF910B", "#04A2DF", "#F05E67"];
 
 const Donut = ({ country, isMapChart, donutClicked, label }) => {
   const [donutState, setDonutState] = useState({
@@ -12,7 +12,6 @@ const Donut = ({ country, isMapChart, donutClicked, label }) => {
     outerRadius: 50,
   });
 
-  const target = useRef(null);
   useEffect(() => {
     if (country) {
       let score = country.overallScore;
@@ -24,7 +23,7 @@ const Donut = ({ country, isMapChart, donutClicked, label }) => {
 
   const centerLabel = !isMapChart ? (
     <text
-      x={donutState.outerRadius + 10}
+      x={donutState.outerRadius + 15}
       y={donutState.outerRadius}
       textAnchor="middle"
       dominantBaseline="middle"
@@ -34,9 +33,6 @@ const Donut = ({ country, isMapChart, donutClicked, label }) => {
       {label}
     </text>
   ) : null;
-  // const tooltip = (country) => {
-  //   return <Tooltip content={<ScoreDetails country={country} />} />;
-  // };
 
   function calculateDonutSize(score) {
     if (score <= 25) {
@@ -74,6 +70,12 @@ const Donut = ({ country, isMapChart, donutClicked, label }) => {
       donutClicked(country.id);
     }
   }
+  const tooltip = isMapChart ? (
+    <Tooltip
+      wrapperStyle={{ zIndex: 1000 }}
+      content={<ScoreDetails country={country} rank={label} />}
+    />
+  ) : null;
   const RADIAN = Math.PI / 180;
   const renderCustomizedLabel = ({
     cx,
@@ -107,7 +109,7 @@ const Donut = ({ country, isMapChart, donutClicked, label }) => {
       width={
         isMapChart
           ? donutState.outerRadius * 2
-          : (donutState.outerRadius + 10) * 2
+          : (donutState.outerRadius + 15) * 2
       }
       height={donutState.outerRadius * 2}
       onClick={handleClick}
@@ -116,14 +118,9 @@ const Donut = ({ country, isMapChart, donutClicked, label }) => {
           ? { left: -donutState.outerRadius, top: -donutState.outerRadius }
           : null
       }
-      ref={target}
     >
-      <Tooltip
-        wrapperStyle={{ zIndex: 1000 }}
-        content={<ScoreDetails country={country} rank={label} />}
-      />
-
       {centerLabel}
+      {tooltip}
       <Pie
         data={country.scores}
         innerRadius={donutState.innerRadius}

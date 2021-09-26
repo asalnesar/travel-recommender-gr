@@ -4,12 +4,12 @@ import "../App.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faGlassCheers,
-  faEuroSign,
+  faMoneyBillWave,
   faCampground,
   faCamera,
 } from "@fortawesome/free-solid-svg-icons";
 
-const COLORS = ["#7030a0", "#00b050", "#ffc000", "#0070c0"];
+const COLORS = ["#14B1B2", "#FF910B", "#04A2DF", "#F05E67"];
 
 const strings = (item) => {
   switch (item) {
@@ -17,7 +17,7 @@ const strings = (item) => {
       return {
         title: "Price",
         description: "How much are you willing to spend?",
-        symbol: faEuroSign,
+        symbol: faMoneyBillWave,
       };
     case "sightSeeing":
       return {
