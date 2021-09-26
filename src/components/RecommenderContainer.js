@@ -4,7 +4,7 @@ import RecommendationDetail from "./RecommendationDetail";
 
 const RecommenderContainer = ({ countries, activeRecommendation }) => {
   // const [scoredCountries, setScoredCountries] = useState([]);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(-1);
   const [activeId, setActiveId] = useState(activeRecommendation);
 
   useEffect(() => {
