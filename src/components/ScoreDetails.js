@@ -1,7 +1,7 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 
-const COLORS = ["#7030a0", "#00b050", "#ffc000", "#0070c0"];
+const COLORS = ["#14B1B2", "#FF910B", "#04A2DF", "#F05E67"];
 
 export const ScoreRow = ({ name, value, color }) => {
   return (
