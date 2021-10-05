@@ -1,5 +1,8 @@
 # travel-recommender
-A recommender system of travel destinations
+A new technique to visualize destination recommender systems
+
+## Demo
+A demo of this interface is available on https://travel-recommender-tum.netlify.app/
 ## Getting Started
 
 You need git to clone our repository.
